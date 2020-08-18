@@ -1,0 +1,5 @@
+    1  sudo apt install build-essential
+    2  mkdir ~/week1
+    3  cd ~/week1
+    4  ls /usr/bin | grep gcc | sort -r > ex1.txt
+    5  history > ex2.txt
