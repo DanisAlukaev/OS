@@ -1,3 +1,6 @@
+// BS19-02 Alukaev Danis
+// Task 4.
+
 #include <stdio.h>
 #include <stdlib.h>
 
