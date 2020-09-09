@@ -1,4 +1,7 @@
-﻿#include <stdio.h>
+﻿// BS19-02 Alukaev Danis
+// Task 2.
+
+#include <stdio.h>
 #include <stdlib.h>
 
 /*
