@@ -1,9 +1,12 @@
 # BS19-02 Alukaev Danis
 # Task 2.
 
-# It is impossible to predict the occurence of the race condition; in particular, 
-# in the first run it appeared on the 40-th iteration, in the second-on the 110-th iteration.
-# In fact, the critical region is a file ex2.txt.
+# It is impossible to predict the occurence of the race condition, since the problem occurs 
+# when several processes read file and write to it at the same moment. 
+# Particularly, in the first run it appeared on the 310-th iteration.
+# In fact, the critical region are the
+# 	last=`tail -n 1 ex2.txt` and 
+# 	echo $((last+1)) >> ex2.txt instructions. 
 
 # create file ex2.txt
 touch ex2.txt

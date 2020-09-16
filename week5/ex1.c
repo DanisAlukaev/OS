@@ -2,8 +2,7 @@
 // Task 1.
 
 /*
-The following program prints:
-
+The following program outputs:
 1. By default:
 This is the thread 448440128; created new thread (448435968) with number 0.
 This is the thread 448440128; created new thread (440043264) with number 1.
@@ -16,6 +15,9 @@ This is the thread 431650560 with number 2.
 This is the thread 440043264 with number 1.
 This is the thread 448435968 with number 0.
 
+It seems that threads start execution using a LIFO policy. In other words, processes still
+run in pseudo-parallel, but the order of execution is following: the latest created thread starts execution firs.t
+
 2. For sequential version:
 This is the thread 1643509568; created new thread (1643505408) with number 0.
 This is the thread 1643505408 with number 0.
@@ -27,6 +29,9 @@ This is the thread 1643509568; created new thread (1643505408) with number 3.
 This is the thread 1643505408 with number 3.
 This is the thread 1643509568; created new thread (1643505408) with number 4.
 This is the thread 1643505408 with number 4.
+
+Using pthread_join() allows to execute threads sequentially, i.e.,
+wait for the previous thread to terminate before starting the next one.
 */
 
 #include <pthread.h>
