@@ -1,8 +1,9 @@
 # BS19-02 Alukaev Danis
 # Task 2.
 
-# It is impossible to predict the occurence of the race condition;
-# in particular, in the first run it appeared on the 10-th iteration, in the second-on the 2-nd iteration.
+# It is impossible to predict the occurence of the race condition; in particular, 
+# in the first run it appeared on the 40-th iteration, in the second-on the 110-th iteration.
+# In fact, the critical region is a file ex2.txt.
 
 # create file ex2.txt
 touch ex2.txt
