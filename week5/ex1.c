@@ -39,25 +39,29 @@ This is the thread 1643505408 with number 4.
 
 pthread_t thread_id[N];
 
-void *idThread(int i) {
-	// output thread's id and its number that is exactly iteration, on which this thread was created
-	printf("This is the thread %d with number %d.\n",(int)pthread_self(),i);
-	// terminate current thread
-	pthread_exit(NULL);
+void *idThread(int i)
+{
+    // output thread's id and its number that is exactly iteration, on which this thread was created
+    printf("This is the thread %d with number %d.\n",(int)pthread_self(),i);
+    // terminate current thread
+    pthread_exit(NULL);
 }
 
-int main(int argc, char *argv[]) {
-	for (int i=0;i<N;i++) {
-		// create new thread that executes idThread
-		int rc = pthread_create(&thread_id[i],NULL,idThread,i);
-		if(rc){
-			printf("\n ERROR: return code from pthread_create is %d.\n", rc);
-			exit(1);
-		}
-		printf("This is the thread %d; created new thread (%d) with number %d.\n",(int)pthread_self(),(int)thread_id[i],i);
-		// wait for the i-th thread to terminate
-		// used to force the order to be strictly sequential
-		pthread_join(thread_id[i], NULL);
- 	}
- 	pthread_exit(NULL);
+int main(int argc, char *argv[])
+{
+    for (int i=0; i<N; i++)
+    {
+        // create new thread that executes idThread
+        int rc = pthread_create(&thread_id[i],NULL,idThread,i);
+        if(rc)
+        {
+            printf("\n ERROR: return code from pthread_create is %d.\n", rc);
+            exit(1);
+        }
+        printf("This is the thread %d; created new thread (%d) with number %d.\n",(int)pthread_self(),(int)thread_id[i],i);
+        // wait for the i-th thread to terminate
+        // used to force the order to be strictly sequential
+        pthread_join(thread_id[i], NULL); // commented by default
+    }
+    pthread_exit(NULL);
 }
