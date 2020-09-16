@@ -17,7 +17,7 @@ int buffer[CAPACITY];
 int items=0;
 // create new instances of mutex and conditional variables
 pthread_mutex_t mutex;
-pthread_cond_t producer_s,consumer_s;
+pthread_cond_t producer_s, consumer_s;
 
 void *producer()
 {
@@ -28,7 +28,7 @@ void *producer()
         if(items==CAPACITY-1)
         {
             // producer starts sleeping
-            pthread_cond_wait(&producer_s, &mutex);
+            pthread_cond_wait(&producer_s,&mutex);
             // print state of producer
             printf("Producer starts sleeping.\n");
             fflush(stdout);
@@ -58,7 +58,7 @@ void *consumer()
         if(items==0)
         {
             // consumer starts sleeping
-            pthread_cond_wait(&consumer_s, &mutex);
+            pthread_cond_wait(&consumer_s,&mutex);
             // print state of producer
             printf("Consumer starts sleeping.\n");
             fflush(stdout);
@@ -81,22 +81,22 @@ void *consumer()
 
 int main()
 {
-    pthread_t producer_thread, consumer_thread;
+    pthread_t producer_thread,consumer_thread;
     // fill buffer
     // -1 stands for abscence of item in buffer
     // 0 stands for presence of item in buffer
-    for(int i=0; i<CAPACITY; i++)
+    for(int i=0;i<CAPACITY;i++)
         buffer[items]=-1;
     // initialize conditional variables and mutex
-    pthread_cond_init(&producer_s, NULL);
-    pthread_cond_init(&consumer_s, NULL);
+    pthread_cond_init(&producer_s,NULL);
+    pthread_cond_init(&consumer_s,NULL);
     pthread_mutex_init(&mutex, NULL);
     // create producer and consumer threads
-    pthread_create(&producer_thread, NULL, &producer, NULL);
-    pthread_create(&consumer_thread, NULL, &consumer, NULL);
+    pthread_create(&producer_thread,NULL,&producer,NULL);
+    pthread_create(&consumer_thread,NULL,&consumer,NULL);
     // wait for the producer and consumer threads to terminate
-    pthread_join(producer_thread, NULL);
-    pthread_join(consumer_thread, NULL);
+    pthread_join(producer_thread,NULL);
+    pthread_join(consumer_thread,NULL);
     // destroy conditional variables and mutex
     pthread_cond_destroy(&producer_s);
     pthread_cond_destroy(&consumer_s);

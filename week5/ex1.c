@@ -54,7 +54,7 @@ void *idThread(int i)
 
 int main(int argc, char *argv[])
 {
-    for (int i=0; i<N; i++)
+    for (int i=0;i<N;i++)
     {
         // create new thread that executes idThread
         int rc = pthread_create(&thread_id[i],NULL,idThread,i);
@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
         printf("This is the thread %d; created new thread (%d) with number %d.\n",(int)pthread_self(),(int)thread_id[i],i);
         // wait for the i-th thread to terminate
         // used to force the order to be strictly sequential
-        pthread_join(thread_id[i], NULL); // commented by default
+        pthread_join(thread_id[i],NULL); // commented by default
     }
     pthread_exit(NULL);
 }
