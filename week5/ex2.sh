@@ -15,6 +15,7 @@ echo 0 > ex2.txt;
 # perform read-write process N times 
 N=500
 while true; do
+    # use auxiliary file ex2.lock as a marker to prevent race condition (commented in initial version)
     if ln ex2.txt ex2.lock; then 	
         # read last element from ex2.txt
         last=`tail -n 1 ex2.txt`
