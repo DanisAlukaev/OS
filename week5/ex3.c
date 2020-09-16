@@ -42,10 +42,6 @@ void *producer()
         printf("Item produced. Buffer: %d/%d \n",items,CAPACITY);
         fflush(stdout);
 
-        if(items==1)
-        {
-            // wake up consumer
-        }
         // unlock consumer thread
         pthread_cond_signal(&consumer_s);
         // unlock mutex
@@ -76,10 +72,6 @@ void *consumer()
         printf("Item taken. Buffer: %d/%d \n",items,CAPACITY);
         fflush(stdout);
 
-        if(items==CAPACITY-1)
-        {
-            // wake up producer
-        }
         // unlock producer thread
         pthread_cond_signal(&producer_s);
         // unlock mutex
