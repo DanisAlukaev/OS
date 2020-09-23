@@ -1,8 +1,6 @@
 // BS19-02 Alukaev Danis
 // Task 1.
-/**
- * Assumption: Completion time is the same with Exit time, i.e., the time when a process completes its execution and exit from the system.
-*/
+// Assumption: Completion time is the same with Exit time, i.e., the time when a process completes its execution and exit from the system.
 
 /*
 Sample input:
@@ -24,7 +22,6 @@ id      AT      BT      CT      TAT     WT
 Average Turnaround Time = 5.666667
 Average Waiting Time = 3.333333
 */
-
 
 #include <stdio.h>
 #include <stdlib.h>

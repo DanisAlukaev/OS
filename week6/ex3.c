@@ -1,8 +1,6 @@
 // BS19-02 Alukaev Danis
 // Task 3.
-/**
- * Assumption: Completion time is the same with Exit time, i.e., the time when a process completes its execution and exit from the system.
-*/
+// Assumption: Completion time is the same with Exit time, i.e., the time when a process completes its execution and exit from the system.
 
 /*
 Sample input:
@@ -126,11 +124,10 @@ Average Waiting Time = 7.900000
 Average Turnaround Time = 20.600000
 Average Waiting Time = 16.400000
 
-In both sample cases presented in slides the least average turnaround time and waiting time is for "Shortest job next"-policy
+In both sample cases presented in slides the least average turnaround time and waiting time are for the "Shortest job next"-policy
 scheduler. However, it does not make any sense in general, and results may differ. 
 
 */
-
 
 #include <stdio.h>
 #include <stdlib.h>
