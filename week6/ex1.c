@@ -1,109 +1,137 @@
 // BS19-02 Alukaev Danis
 // Task 1.
+/**
+ * Assumption: Completion time is the same with Exit time, i.e., the time when a process completes its execution and exit from the system.
+*/
+
+/*
+Sample input:
+6
+1 1
+3 3
+4 2
+5 3
+2 1
+0 4
+
+id      AT      BT      CT      TAT     WT
+5       0       4       4       4       0
+0       1       1       5       4       3
+4       2       1       6       4       3
+1       3       3       9       6       3
+2       4       2       11      7       5
+3       5       3       14      9       6
+Average Turnaround Time = 5.666667
+Average Waiting Time = 3.333333
+*/
+
 
 #include <stdio.h>
 #include <stdlib.h>
 
 // Structure simulating process.
-typedef struct processPair
+// Consists of Arrival time(AT), Burst time(BT), Completion time (CT), Turn around time (TAT),
+// Waiting time (WT), id (process sequence number from the input), executed (flag).
+typedef struct process
 {
     int AT;
     int BT;
     int CT;
-    int WT;
     int TAT;
+    int WT;
+    int id;
     int executed;
-} processPair_t;
+} process_t;
 
 /**
- * Sorts the input array of pairs <Arrival time(AT),Burst time(BT)> by Arrival time(AT) using Bubble sort algorithm.
+ * Sorts the input array of processes by AT using Bubble sort algorithm.
  * Time complexity: T(n)=O(n*n). Sorting is in-place.
  *
- * @param array - an array of pairs to be sorted.
- * @param n - number of elements in the input array.
+ * @param processes - an array of processes to be sorted.
+ * @param numProcesses - number of processes in the input array.
  */
-void processBubbleSort(processPair_t array[], int n)
+void processFCFS(process_t processes[], int numProcesses)
 {
-    for(int i=0; i<n-1; i++)
+    for(int i=0; i<numProcesses-1; i++)
     {
-        for(int j=0; j<n-i-1; j++)
+        for(int j=0; j<numProcesses-i-1; j++)
         {
-            if(array[j].AT>array[j+1].AT)
+            if(processes[j].AT>processes[j+1].AT)
             {
-                processPair_t temp=array[j];
-                array[j]=array[j+1];
-                array[j+1]=temp;
+                process_t temp=processes[j];
+                processes[j]=processes[j+1];
+                processes[j+1]=temp;
             }
         }
     }
 }
 
 /**
- * Decides what task should be performed next. Uses "First come, first served" logic.
- * Time complexity: T(n)=O(n).
+ * Computes CT, TAT, WT. Operates on sorted array of processes.
+ * Uses "First come, first served" logic.
+ * Used formulas:
+ * TAT = CT - AT
+ * WT = TAT - BT
  *
  * @param array - an array of processes.
  * @param n - number of elements in the input array.
  */
-int getNextProcess(processPair_t array[], int n)
+void estimateProcesses(process_t processes[], int numProcesses)
 {
-    for (int i=0; i<n; i++)
+    // Firstly, compute CT, TAT, WT for the first scheduled process (which arrival time is the least).
+    processes[0].CT=processes[0].AT+processes[0].BT;
+    processes[0].TAT=processes[0].CT-processes[0].AT;
+    processes[0].WT=processes[0].TAT-processes[0].BT;
+    processes[0].executed=1;
+    // Then, compute same characteristics for the rest of processes.
+    // Since CT of i-th process depends on CT of (i-1)-th process, we proceed with first process in advance.
+    for(int i=1; i<numProcesses; i++)
     {
-        // If process is pending.
-        if(array[i].executed==0)
+        // Execute only pending processes.
+        if(!processes[i].executed)
         {
-            // Mark as done.
-            array[i].executed=1;
-            // Return id.
-            return i;
+            processes[i].CT=processes[i-1].CT+processes[i].BT;
+            processes[i].TAT=processes[i].CT-processes[i].AT;
+            processes[i].WT=processes[i].TAT-processes[i].BT;
+            processes[i].executed=1;
         }
     }
-    // Otherwise, return id of the last process.
-    return n;
 }
 
 int main()
 {
     int numProcesses;
-    scanf("%d", &numProcesses);
-    // Array to store pairs <Arrival time(AT),Burst time(BT)> describing processes.
-    processPair_t processes[numProcesses];
-    // Variables to store Average Turnaround time, Average waiting time.
+    // Variables to store Average Turnaround time (avTAT), Average waiting time(avWT).
     float avTAT=0, avWT=0;
+    scanf("%d", &numProcesses);
+    // Array of processes.
+    process_t processes[numProcesses];
+
     // Get processes.
     for(int i=0; i<numProcesses; i++)
     {
         scanf("%d", &(processes[i].AT));
         scanf("%d", &(processes[i].BT));
         processes[i].executed=0;
+        processes[i].id=i;
     }
+
     // Sort all processes by Arrival time (AT).
-    processBubbleSort(processes, numProcesses);
-    // Compute Completion time (CT), Turn around time (TAT), Waiting time (WT) for all processes.
-    // Assume that Completion time is the same with Exit time, i.e., the time when a process completes its execution and exit from the system.
-    // TAT = CT - AT
-    // WT = TAT - BT
-    for(int i=0; i<numProcesses; i++)
-    {
-        // Get an id (index) of process to be performed.
-        int j=getNextProcess(processes, numProcesses);
-        if(j==0)
-            processes[j].CT=processes[j].AT+processes[j].BT;
-        else
-            processes[j].CT=processes[j-1].CT+processes[i].BT;
-        processes[j].TAT=processes[j].CT-processes[j].AT;
-        processes[j].WT=processes[j].TAT-processes[j].BT;
-    }
-    // Print header of the table.
+    processFCFS(processes, numProcesses);
+    // Compute CT, TAT, WT.
+    estimateProcesses(processes, numProcesses);
+
+    // Print the header of the table.
     printf("id\tAT\tBT\tCT\tTAT\tWT\n");
-    // Print content of table: id of process (index in array), AT, BT, CT, TAT, WT.
+    // Print content of table: id, AT, BT, CT, TAT, WT.
+    // Along the way count total TAT and WT.
     for(int i=0; i<numProcesses; i++)
     {
-        printf("%d\t%d\t%d\t%d\t%d\t%d\n", i, processes[i].AT, processes[i].BT, processes[i].CT, processes[i].TAT, processes[i].WT);
+        printf("%d\t%d\t%d\t%d\t%d\t%d\n", processes[i].id, processes[i].AT, processes[i].BT, processes[i].CT, processes[i].TAT, processes[i].WT);
         avTAT+=processes[i].TAT;
         avWT+=processes[i].WT;
     }
-    // Compute and output Average Turnaround Time and Average Waiting Time.
+    // Compute and output average TAT and average WT.
     avTAT/=numProcesses;
     avWT/=numProcesses;
     printf("Average Turnaround Time = %f \n", avTAT);
