@@ -14,8 +14,9 @@ int main()
     *s = foo;
     // The following line does not cause segmentation fault:
     // printf("s is %s\n",s);
-    // but outputs not in accordance with the original idea.
-    // The argument should be of a type char*.
+    // but it outputs not in accordance with the original idea.
+    // We can print the address using printf("s is %p\n",s);
+    // But for me it is better to make the argument of the char* type.
     printf("s is %s\n",*s);
     s[0] = foo;
     printf("s[0] is %s\n",s[0]);
