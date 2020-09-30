@@ -38,7 +38,7 @@ void *myRealloc(void *ptr, size_t size)
     void *temp;
     size_t ptrSize=malloc_usable_size(ptr);
     if(ptr==NULL)
-        // Allocate memory of size "size".
+        // Allocate a memory block of size "size".
         temp=malloc(size);
     else
     {
@@ -47,9 +47,9 @@ void *myRealloc(void *ptr, size_t size)
             free(temp);
         else
         {
-            // Allocate memory.
+            // Allocate a memory block of size "size".
             temp=malloc(size);
-            // Copy content to new memory block.
+            // Copy content to the new memory block.
             if(size>ptrSize)
                 memcpy(temp,ptr,ptrSize);
             else
