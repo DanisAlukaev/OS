@@ -1,6 +1,13 @@
 // BS19-02 Alukaev Danis
 // Task 2.
 
+/*
+Sample output:
+Type no. if integers in array:
+7
+0 1 2 3 4 5 6
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 

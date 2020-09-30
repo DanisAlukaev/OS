@@ -1,13 +1,25 @@
 // BS19-02 Alukaev Danis
 // Task 4.
 
-// Original
+/*
+The output will be:
+0 1 2 3 4
+Reallocate equal-sized array with size 5.
+0 1 2 3 4
+Reallocate larger array with size 7.
+0 1 2 3 4 0 0
+Reallocate smaller array with size 3.
+0 1 2
+*/
+
+// Define sizes for test:
+// Original size.
 #define O 5
-// Equal-sized
+// Equal-sized.
 #define E 5
-// Larger
+// Larger size.
 #define L 7
-// Smaller
+// Smaller size.
 #define S 3
 
 #include <stdlib.h>
@@ -26,20 +38,25 @@ void *myRealloc(void *ptr, size_t size)
     void *temp;
     size_t ptrSize=malloc_usable_size(ptr);
     if(ptr==NULL)
+        // Allocate memory of size "size".
         temp=malloc(size);
     else
     {
         if(size==0)
+            // Since required size is 0, deallocate the memory.
             free(temp);
         else
         {
+            // Allocate memory.
             temp=malloc(size);
+            // Copy content to new memory block.
             if(size>ptrSize)
                 memcpy(temp,ptr,ptrSize);
             else
                 memcpy(temp,ptr,size);
         }
     }
+    // Deallocate the memory.
     free(ptr);
     return temp;
 }
