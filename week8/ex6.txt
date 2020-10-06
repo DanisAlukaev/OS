@@ -1,0 +1,3 @@
+Since the machine has 8KB pages, the offset is 13 last bits in an address (8KB=8192bit=2^{13}bit).
+By definition the machine has 16-bit virtual address, so to encode the number of page frames there available only 16-13=3bits.
+Therefore, for a single-level linear page table needed only 2^{3}=8 entries.
