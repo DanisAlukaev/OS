@@ -24,7 +24,9 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
  0  0   1804  79076  76104 877940   16    0    16     0  117  307  5  2 92  1  0
 
 Both "si" (amount of memory swapped in from disk per second) and "so" (amount of memory swapped to disk per second) 
-have non-zero values when the swapping happened.
+have non-zero values when the swapping happened. As one can see, mostly swaps out (swaps to disk) occur to provide 
+space in the RAM for the current process. As the program finished, some data are loaded from the disk, i.e., "si" = 16 
+for the last entry in the above table.
 */
 
 #include <stdio.h>

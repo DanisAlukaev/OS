@@ -1,6 +1,9 @@
-The physical address points to the real memory location in Random-access memory (RAM). Apparently, only the
-the programs that are currently being executed are placed in RAM. However, often it cannot contain all the programs
-to be executed, so arrises the problem of program accomodation.
-In fact, the virtual addressing resolve this issue by secondary memory usage. During compilation of program CPU assigns
-virtual address to it. This address refers to the address space of correspondent process. At the execution time virtual  
-addresses mapped to the physical addresses.
+BS19-02 Alukaev Danis
+Task 5.
+
+The physical address points to the real memory location in Random-access memory (RAM). In fact, only the programs 
+that are currently being executed are placed in RAM. However, often it cannot contain all the programs to be executed, 
+so arrises the problem of program accommodation.
+Indeed, the virtual addressing resolves this issue, because virtual addresses (VA) can be larger than physical addresses as VA is 
+purely logical. During the compilation of the program, CPU creates and assigns a VA to it. This address refers to the address space 
+of the corresponding process. At the execution time, VAs are mapped to the physical addresses by Memory Management Unit (MMU). 

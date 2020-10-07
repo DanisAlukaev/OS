@@ -1,12 +1,15 @@
+BS19-02 Alukaev Danis
+Task 3.
+
 For the 3rd task was used the following shell script:
 
 #!/bin/bash
 gcc ex2.c -o ex2
 ./ex2 & top
 
-During the execution values of VIRT, RES, MEM increased. As the program progressed, 
-the correspondent process moved to the top of the table. 
-Then, eventually, this entry became the first one as shown below and was removed as finished:
+During the execution, values of VIRT, RES, MEM increased (the table was updated from time to time). 
+As the program progressed, the correspondent process moved to the top of the table. Then, eventually, 
+this entry became the first one as shown below and was removed as finished:
 
     PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND  
    3351 danis     20   0  104928 103544   1092 S   1,7   5,1   0:00.14 ex2      
@@ -21,4 +24,4 @@ Then, eventually, this entry became the first one as shown below and was removed
    1402 danis     20   0 1076252 175924  13816 S   0,3   8,6   0:09.53 snap-st+ 
    2538 root      20   0       0      0      0 I   0,3   0,0   0:00.22 kworker+ 
 
-Note that the value of occupied physical memory is approximately 10MB.
+Note that the value of used physical memory is approximately 100MB that is indeed 10MB allocated ten times.
