@@ -1,0 +1,11 @@
+// BS19-02 Alukaev Danis
+// Task 2.
+
+Let the number of page frames is N.
+
+The number of Hits will be maximized when the sequence of references has the form: 0, 1, 2, ... , N-1, any subset of Powerset of {0,1,2,3 ... N-1}. 
+In such a case the Hit/Miss Ratio is (cardinality of a subset of Powerset)/N, so for the Hit/Miss Ratio to be greater than 1, the cardinality 
+of chosen subset should be greater than N. Specifically, one might take the sequence 0, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0 with Hit/Miss Ratio 6/5.
+
+The number of Misses will be maximized when the sequence of references has the form: 0, 1, 2, ... , N-1. In fact, misses will occur for each reference, 
+so the Hit/Miss Ratio is always 0/N. For instance, this sequence can be 0, 1, 2, 3, 4 with Hit/Miss Ratio 0/5.
