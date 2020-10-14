@@ -66,7 +66,7 @@ void updateAge(frame_t frames[], int numFrames)
         // The counters are shifted right 1 bit.
         frames[i].age = frames[i].age >> 1;
         // The R-bit is added to the leftmost bit.
-        frames[i].age |= frames[i].R << 28;
+        frames[i].age |= frames[i].R << 30;
         // Nullify all R-bits.
         frames[i].R = 0;
     }
@@ -140,7 +140,7 @@ int main()
             // Update the page number.
             frames[toReplace].page = page;
             // Nullify the age of the frame.
-            frames[toReplace].age = 1 << 28;
+            frames[toReplace].age = 1 << 30;
             // Page was referenced
             frames[toReplace].R = 1;
         }
