@@ -3,9 +3,26 @@
 
 Let the number of page frames is N.
 
-The number of Hits will be maximized when the sequence of references has the form: 0, 1, 2, ... , N-1, any subset of Powerset of {0,1,2,3 ... N-1}. 
+The number of Hits will be maximized when the sequence of references has the form: 0, 1, 2, ... , N-1, any subset of Powerset of {0, 1, 2, 3, ... , N-1}, 
+i.e., all pages to which one refers are already in the page frames. 
 In such a case the Hit/Miss Ratio is (cardinality of a subset of Powerset)/N, so for the Hit/Miss Ratio to be greater than 1, the cardinality 
-of chosen subset should be greater than N. Specifically, one might take the sequence 0, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0 with Hit/Miss Ratio 6/5.
+of chosen subset should be greater than N. Specifically, one might take the sequence 0, 0, 0, 0, 0, 0, 0 with Hit/Miss Ratio: 6/1=6.
 
-The number of Misses will be maximized when the sequence of references has the form: 0, 1, 2, ... , N-1. In fact, misses will occur for each reference, 
-so the Hit/Miss Ratio is always 0/N. For instance, this sequence can be 0, 1, 2, 3, 4 with Hit/Miss Ratio 0/5.
+Output of ex1.c for 0 0 0 0 0 0 0 sequence:
+Specify number of frames: 1
+Specify clock interval: 1
+Hits number: 6.
+Misses number: 1.
+Hit/Miss ratio: 6.000000.
+
+
+The number of Misses will be maximized when the sequence of references has the form: 0, 1, 2, ... , M-1. In fact, misses will occur for each reference
+as each of them refers to page that is not in the page frames, so the Hit/Miss Ratio is always 0/M. For instance, this sequence can be 0, 1, 2, 3, 4, 5, 6
+with Hit/Miss Ratio: 0/7=0.
+
+Output of ex1.c for 0 1 2 3 4 5 6 sequence:
+Specify number of frames: 1
+Specify clock interval: 1
+Hits number: 0.
+Misses number: 7.
+Hit/Miss ratio: 0.000000.

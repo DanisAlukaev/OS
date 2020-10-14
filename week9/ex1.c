@@ -109,7 +109,7 @@ int main()
     {
         // Nullify all attributes.
         frames[i].age = 0;
-        frames[i].page = 0;
+        frames[i].page = -1;
         frames[i].R = 0;
     }
 
