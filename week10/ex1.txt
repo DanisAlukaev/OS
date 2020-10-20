@@ -1,0 +1,7 @@
+// BS19-02 Alukaev Danis
+// Task 1.
+
+298822 _ex1.txt
+298822 _ex1_1.txt
+298822 _ex1_2.txt
+

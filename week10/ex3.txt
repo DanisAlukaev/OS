@@ -1,0 +1,40 @@
+﻿// BS19-02 Alukaev Danis
+// Task 3.
+
+Create the file _ex3.txt:
+$ nano _ex3.txt
+
+Remove execute permission for everybody, i.e., grant permission to execute for nobody:
+$ chmod -x _ex3.txt
+$ ls -l _ex3.txt
+-rw-rw-r-- 1 danis danis 0 окт 20 15:33 _ex3.txt
+
+Grant all permissions to owner and others (not group):
+$ chmod 707 _ex3.txt
+$ ls -l _ex3.txt
+-rwx---rwx 1 danis danis 0 окт 20 15:33 _ex3.txt
+
+Make group permissions equal to user permissions:
+$ chmod g=u _ex3.txt
+$ ls -l _ex3.txt
+-rwxrwxrwx 1 danis danis 0 окт 20 15:33 _ex3.txt
+
+Answers:
+1. 660 can be treated as -rw-rw----, meaning that only owner and group have the permission to read file and write to it.
+
+$ chmod 660 _ex3.txt
+$ ls -l _ex3.txt
+-rw-rw---- 1 danis danis 0 окт 20 15:33 _ex3.txt
+
+2. 775 can be treated as -rwxrwxr-x, meaning that only owner and group have all permissions (read, write, execute), but the others 
+can only read and execute it.
+
+$ chmod 775 _ex3.txt
+$ ls -l _ex3.txt
+-rwxrwxr-x 1 danis danis 0 окт 20 15:33 _ex3.txt
+
+3. 777 can be treated as -rwxrwxrwx, meaning that for owner, group and others granted all permissions (read, write, execute).
+
+$ chmod 777 _ex3.txt
+$ ls -l _ex3.txt
+-rwxrwxrwx 1 danis danis 0 окт 20 15:33 _ex3.txt
