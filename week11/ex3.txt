@@ -1,0 +1,7 @@
+// BS19-02 Alukaev Danis
+// Task 3.
+
+The first code snippet produces the string "Hello" as an output twice. Since the '\n' symbol flushes the content of buffer, 
+and in the first program, we do not have it before the fork() unlike the second one, the buffer will contain the string "Hello." 
+Consequently, the system call fork() created a child process holding this buffer, and it was printed again.
+In contrast, in the second case, the buffer was cleared before the fork and, therefore, only one "Hello" was printed.
