@@ -3,10 +3,8 @@
 
 Preliminaries: function printf() has a buffer, and the content of this buffer is flushed after the '\n' symbol appeared in a sequence
 of charachters.
-
 The first code snippet produces the string "Hello\n" as an output twice. Since we do not have '\n' symbol before the fork(), the buffer 
 will contain the string "Hello" after the forking. Consequently, the system call fork() created a child process holding this buffer, and 
 it was printed again.
-
 In contrast, in the second case, the buffer was cleared before the fork(). Therefore, both parent and child processes had empty buffer after 
 the forking. As a result, the "Hello\n\n" was printed.

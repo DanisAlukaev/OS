@@ -33,14 +33,14 @@ void generate_file(char* filepath)
     int charset_size = 70;
     char* charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?! ";
     // Append random letters to string.
-	for (int i = 0; i < string_size-1; i++)
+    for (int i = 0; i < string_size-1; i++)
         string[i] = charset[rand() % charset_size];
     // Denote the end of the string.
     string[string_size-1] = '\0';
     // Write the string in file.
-	fprintf(new_file, string);
+    fprintf(new_file, string);
     // Close the file.
-	fclose(new_file);
+    fclose(new_file);
 }
 
 int main()
