@@ -1,0 +1,113 @@
+// BS19-02 Alukaev Danis
+// Task 3.
+
+Results:
+
+# Create files of size 1 MB and 50 MB
+$ dd if=/dev/zero of=fileA bs=1048576 count=1
+$ dd if=/dev/zero of=fileB bs=52428800 count=1
+
+Without O_SYNC:
+
+1.1. Buffer size: 8 bytes, File size: 1 MB.
+	$ gcc -DBUF_SIZE=8 -o copy copy.c
+	$ time ./copy fileA fileC
+
+	real	0m0,474s
+	user	0m0,054s
+	sys	0m0,321s	
+	
+1.2. Buffer size: 8 bytes, File size: 50 MB.
+	$ gcc -DBUF_SIZE=8 -o copy copy.c
+	$ time ./copy fileB fileC
+
+	real	0m18,584s
+	user	0m1,898s
+	sys	0m16,458s	
+
+2.1. Buffer size: 128 bytes, File size: 1 MB.
+	$ gcc -DBUF_SIZE=128 -o copy copy.c
+	$ time ./copy fileA fileC
+
+	real	0m0,053s
+	user	0m0,000s
+	sys	0m0,034s
+
+2.2. Buffer size: 128 bytes, File size: 50 MB.
+	$ gcc -DBUF_SIZE=128 -o copy copy.c
+	$ time ./copy fileB fileC	
+	
+	real	0m1,292s
+	user	0m0,110s
+	sys	0m1,109s
+
+3.1. Buffer size: 1024 bytes, File size: 1 MB.
+	$ gcc -DBUF_SIZE=1024 -o copy copy.c
+	$ time ./copy fileA fileC	
+
+	real	0m0,023s
+	user	0m0,000s
+	sys	0m0,018s
+
+3.2. Buffer size: 1024 bytes, File size: 50 MB.
+	$ gcc -DBUF_SIZE=1024 -o copy copy.c
+	$ time ./copy fileB fileC	
+	
+	real	0m0,255s
+	user	0m0,024s
+	sys	0m0,169s
+
+With O_SYNC:
+
+1.1. Buffer size: 8 bytes, File size: 1 MB.
+	$ gcc -DBUF_SIZE=8 -DSYNC=1 -o copy copy.c
+	$ time ./copy fileA fileC
+
+	real	1m35,219s
+	user	0m0,134s
+	sys	0m5,534s
+
+1.2. Buffer size: 8 bytes, File size: 50 MB.
+	$ gcc -DBUF_SIZE=8 -DSYNC=1 -o copy copy.c
+	$ time ./copy fileB fileC
+
+	Execution took 20 minutes , and I terminated it.	
+
+2.1. Buffer size: 128 bytes, File size: 1 MB.
+	$ gcc -DBUF_SIZE=128 -DSYNC=1 -o copy copy.c
+	$ time ./copy fileA fileC
+
+	real	0m5,723s
+	user	0m0,000s
+	sys	0m0,363s
+
+2.2. Buffer size: 128 bytes, File size: 50 MB.
+	$ gcc -DBUF_SIZE=128 -DSYNC=1 -o copy copy.c
+	$ time ./copy fileB fileC	
+
+	real	5m23,460s
+	user	0m0,555s
+	sys	0m17,516s
+	
+3.1. Buffer size: 1024 bytes, File size: 1 MB.
+	$ gcc -DBUF_SIZE=1024 -DSYNC=1 -o copy copy.c
+	$ time ./copy fileA fileC
+
+	real	0m0,754s
+	user	0m0,000s
+	sys	0m0,048s
+
+3.2. Buffer size: 1024 bytes, File size: 50 MB.
+	$ gcc -DBUF_SIZE=1024 -DSYNC=1 -o copy copy.c
+	$ time ./copy fileB fileC	
+
+	real	0m35,773s
+	user	0m0,145s
+	sys	0m2,168s
+	
+Firstly, it might be noticed that the larger the buffer, the less time it takes to execute the command. In this case, the number of transfers
+during the copying is proportionally decreased that significantly speeds up the process.
+
+Secondly, the O_SINC flag reduces the speed of copying. According to the manual for open(), a system call with this flag "will complete according 
+to the requirements of synchronized I/O file integrity completion", i.e., it assures that the output data and associated file metadata have been 
+transferred to the underlying hardware. 
