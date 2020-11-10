@@ -1,0 +1,17 @@
+BS19-02 Alukaev Danis
+Task 2.
+
+Strategies of dealing with deadlocks:
+1. Recovery.
+	Certain modification of this strategy involves killing the process, which for some processes cannot be applicable. 
+	Also, the Recovery through Rollback requires writing process' state to a file, and such a memory consumption might
+	be impermissible.
+2. Prevention.
+	Prevention strategy implies the following scenarios for different cases so that deadlocks cannot happen. There were 
+	described four basic conditions: mutual exclusion, hold and wait, no preemption, and circular wait. The main problem 
+	that might occur is the inability to parallelism due to resource allocation constraints.
+3. Avoidance.
+	This strategy might be used if there is available information about the required resources for each process. In this
+	case, the system is able to decide whether granting a resource is safe or not. 
+	In order to determine the state to which request leads the Banker's algorithm can be applied. This algorithm relatively
+	effective, so avoidance becomes more advantageous compared to other strategies.
